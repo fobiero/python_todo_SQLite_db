@@ -20,6 +20,7 @@ class Todo(db.Model):
     def __repr__(self):
         return '<Task %r>' % self.id
 
+# create task route handler 
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
@@ -36,6 +37,35 @@ def index():
     else :
         tasks = Todo.query.order_by(Todo.created_at).all()
         return render_template('index.html', tasks = tasks)
+
+# delete task route 
+@app.route('/delete/<int:id>')
+def delete(id):
+    delete_task = Todo.query.get_or_404(id)
+
+    try:
+        db.session.delete(delete_task)
+        db.session.commit()
+        return redirect('/')
+    except :
+        return 'Task with ID not Found!'
+
+
+# update the tasks 
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+def update_task(id):
+    task = Todo.query.get_or_404(id)
+    if request.method == 'POST':
+        task.content = request.form['content']
+
+        try:
+            db.session.commit()
+            return redirect('/')
+        except:
+            return 'Update Error'
+    else: 
+        return render_template('updated.html', task = task)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
