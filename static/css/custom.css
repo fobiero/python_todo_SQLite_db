@@ -8,3 +8,45 @@
 body {
     font-family: sans-serif;
 }
+
+.content {
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.content h1 {
+    font-weight: 400;
+    font-size: 2rem;
+    letter-spacing: .2rem;
+}
+
+.content h3 {
+    font-size: 1rem;
+    font-weight: 200;
+}
+
+form {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    display: flex;
+}
+
+input {
+    outline: none;
+}
+
+input:nth-child(1) {
+    width: 400px;
+    padding: .3rem;
+    margin-right: 1rem;
+}
+
+input:nth-child(2) {
+    padding: .5rem 1.2rem;
+    text-align: center;
+    background: #eee;
+    font-size: .8rem;
+    border: none;
+    outline: none;
+}
